@@ -1,0 +1,48 @@
+{% load django_browser_reload %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="GitHub Codespaces ♥️ Django">
+    <meta name="author" content="GitHub Codespaces">
+    <meta name="generator" content="GitHub Codespaces">
+    <meta name="theme-color" content="#000000">
+    <title>{% block title %}{{ title }} | GitHub Codespaces ♥️ Django{% endblock %}</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body class="text-bg-dark">
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">Bakery Finder</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Need to find a bakery in a hurry? Here's a list of bakeries in your local area</p>
+        </div>
+    </div>
+    <div class="container">
+        {% for bakery in bakeries %}
+            <div>
+                <h2>{{ bakery.name }}</h2>
+                <p>{{ bakery.address|linebreaksbr }}</p>
+                <p>Rating ⭐: {{ bakery.rating }}</p>
+                <img src="{{ bakery.image }}"/>
+                <ol>
+                    {% for item in bakery.item_set.all %}
+                        <ul>
+                            {{ item.name }}: ${{ item.price }}
+                            <div>
+                                <img src="{{ item.image }}"/>
+                            </div>
+                        </ul>
+                    {% endfor %}
+                </ol>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
