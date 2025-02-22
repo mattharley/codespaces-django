@@ -18,6 +18,18 @@ pip install -r requirements.txt
 python manage.py collectstatic
 ```
 
+## To create your first user:
+
+```python
+python manage.py createsuperuser
+```
+
+## To migrate the database:
+
+```python
+python manage.py migrate
+```
+
 ## To run this application:
 
 ```python
